@@ -15,7 +15,7 @@ public class audioplay extends JFrame implements ActionListener
 	public JButton frwdb;
 	public JButton backb;
 	public File f;
-	public int a=1;
+	public int a=1,z=0;
 	
 	
 	public Player p;
@@ -24,12 +24,11 @@ public class audioplay extends JFrame implements ActionListener
 	{
 				setBounds(700,150,250,300);
 				setTitle("BCZplayer");
-				
+				getContentPane().setBackground(Color.YELLOW);
 				
 				mainpanel		= 	new JPanel();
 				bottompanel	=	new JPanel();
 				playb				=	new JButton("I>");
-				pauseb				=	new JButton("II");
 				frwdb				=	new JButton(">>");
 				backb				=	new JButton("<<");
 
@@ -39,12 +38,25 @@ public class audioplay extends JFrame implements ActionListener
 				
 				bottompanel.add(backb);
 				bottompanel.add(playb);
-				bottompanel.add(pauseb);
+			//	bottompanel.add(pauseb);
 				bottompanel.add(frwdb);
+			
+			//***************************************EPIC CSS STARTS HERE*****************************
+				
+				playb.setBackground(Color.BLUE);
+				playb.setContentAreaFilled(true);
+                playb.setOpaque(true);
+				
+				//frwdb.setBackground(Color.BLUE);	
+				//frwd.setContentAreaFilled(true);				
+				//backb.setBackground(Color.BLUE);
+			
+			//***********************************************ENDS HERE*************************************		
+			
 
 				backb.addActionListener(this);
 				playb.addActionListener(this);
-				pauseb.addActionListener(this);
+			//	pauseb.addActionListener(this);
 				frwdb.addActionListener(this);
 				
 				mainpanel.add(bottompanel,BorderLayout.SOUTH);
@@ -65,13 +77,19 @@ public class audioplay extends JFrame implements ActionListener
 					 }
 					}		
 					catch(Exception ex){System.out.println(ex);}
-					
+					if(z==0)
+					{
 							if(e.getSource()==playb){
 									p.start();
+									playb.setText("||");
+									z=1;
 								}
-								else if(e.getSource()==pauseb){
-									p.stop();
-								}
+					}
+					else if(z==1){
+						p.stop();
+						playb.setText("I>");
+						z=0;
+					}
 						
 		  }
 
